@@ -1,0 +1,9 @@
+{
+  "name": "skypager-web-boilerplate",
+  "scripts": {
+    "start": "serve --single"
+  },
+  "dependencies": {
+    "serve": "latest"
+  }
+}
