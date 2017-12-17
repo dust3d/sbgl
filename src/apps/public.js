@@ -12,10 +12,12 @@ import Referral from 'pages/Referral'
 import RefundReturns from 'pages/RefundReturns'
 import TermsOfUse from 'pages/TermsOfUse'
 import Testimonials from 'pages/Testimonials'
+import QuotePage from 'pages/QuotePage'
 
 export const PublicApp = () => (
   <Switch>
     <Route path="/" exact component={PublicHome} />
+    <Route path="/quote" exact component={QuotePage} />
     <Route path="/about-us" exact component={AboutUs} />
     <Route path="/contact" exact component={ContactUs} />
     <Route path="/faq" exact component={FrequentlyAskedQuestions} />
