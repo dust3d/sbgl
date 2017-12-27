@@ -176,13 +176,50 @@ export class QuotePage extends Component {
       <Form.Field label='Yes' control='input' type='radio' name='htmlRadios' />
       <Form.Field label='No' control='input' type='radio' name='htmlRadios' />
     </Form.Group>
-
-
+    <Form.Group grouped>
+    <label>Do You Currently Have A General Liability Policy?</label>
+    <Form.Field label='Yes' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='No' control='input' type='radio' name='htmlRadios' />
+    </Form.Group>
+    <Form.Group grouped>
+    <label>Have You Had A General Liability Claim Within 5 Years?</label>
+    <Form.Field label='Yes' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='No' control='input' type='radio' name='htmlRadios' />
+    </Form.Group>
+    <Form.Group grouped>
+    <label>Have You Been Cancelled, Declined, Or Refused Coverage Within 5 Years?</label>
+    <Form.Field label='Yes' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='No' control='input' type='radio' name='htmlRadios' />
+    </Form.Group>
+    <Form.Group grouped>
+    <label>Deductible</label>
+    <Form.Field label='$500' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$1000' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$2500' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$5000' control='input' type='radio' name='htmlRadios' />
+    </Form.Group>
+    <Form.Group grouped>
+    <label>Incident Max Benefit</label>
+    <Form.Field label='$100,000' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$500,000' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$1,000,000 ' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$2,000,000' control='input' type='radio' name='htmlRadios' />
+    </Form.Group>
+    <Form.Group grouped>
+    <label>Aggregate Max Benefit</label>
+    <Form.Field label='$100,000' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$500,000' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$1,000,000 ' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$2,000,000' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$3,000,000' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='$5,000,000' control='input' type='radio' name='htmlRadios' />
+    </Form.Group>
 
     <Form.Field>
       <Checkbox label='I agree to the Terms and Conditions' />
     </Form.Field>
-    <Button type='submit'>Submit</Button>
+    <Button content='Click Here for Annual QUOTE' secondary />
+    <Button content='Fill Out Online APPLICATION' primary />
   </Form>
       </Container>
     )
