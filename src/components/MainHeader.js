@@ -8,8 +8,8 @@ export class MainHeader extends Component {
   }
 
   static defaultProps = {
-    subheader: 'Web Boilerplate Project',
-    title: 'Skypager'
+    subheader: 'Lowest Rates in the Industry – Guaranteed!',
+    title: 'Small Business General Liability'
   }
 
   render() {

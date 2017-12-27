@@ -12,7 +12,7 @@
     "prebuild": "rimraf public/",
     "build": "NODE_ENV=development ./node_modules/.bin/sky run build/prod",
     "predeploy": "yarn build",
-    "deploy:prod": "yarn build && cd public && now --npm && now alias sbgl.skypager.io"
+    "deploy:prod": "yarn build && cd public && now --npm && now alias sbgl.now.sh"
   },
   "dependencies": {
     "axios": "^0.16.2",
