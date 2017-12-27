@@ -64,6 +64,7 @@ export class QuotePage extends Component {
 </Form.Field>
     
     <Form.Field control='select' label='Number of Years in your Industry'>
+      <option>Select</option>
       <option value='0-2' multiplier='1.05'>0-2 </option>
       <option value='3-7' multiplier='1'>3-7</option>
       <option value='8+' multiplier='0.95'>8+</option>
@@ -137,7 +138,7 @@ export class QuotePage extends Component {
     <option value='501+'>501+</option>
     </Form.Field>
     <Form.Field control='select' label='Gross Annual Business Revenue'>
-    <option disabled>Select Annual Gross Revenue</option>
+    <option>Select Annual Gross Revenue</option>
     <option value='100K or Less'>100K or Less</option>
     <option value='101-150K'>101-150</option>
     <option value='151-250K'>151-250</option>
@@ -146,7 +147,7 @@ export class QuotePage extends Component {
     <option value='1MM+'>1 Million+</option>
     </Form.Field>
     <Form.Field control='select' label='Total Number Of Employees (Including Owner)'>
-    <option>Select </option>
+    <option>Select Number of Employees</option>
     <option value='1'>1</option>
     <option value='2'>2</option>
     <option value='3'>3</option>
@@ -160,6 +161,7 @@ export class QuotePage extends Component {
     <option value='11+'>11+</option>
     </Form.Field>
     <Form.Field control='select' label='Amount Of Foot Traffic In Your Business per Week'>
+    <option>Select</option>
     <option value='under 50'>under 50</option>
     <option value='51-200'>51-200</option>
     <option value='201-500'>201-500</option>
