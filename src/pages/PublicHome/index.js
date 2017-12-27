@@ -21,13 +21,8 @@ export class PublicHome extends Component {
         <Segment piled>
           <Link to="/" children="Home" />
           <br />
-          <Link to="/quote" children={`QUOTE ${1 + 1 * 42}`} />
+          <Link to="/quote" children="QUOTE" />
           <br />
-
-          <Link to="/quote">
-            Alternative <br/>
-          </Link>
-
           <Link to="/about-us" children="About" />
           <br />
           <Link to="/contact" children="Contact" />
