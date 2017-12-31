@@ -26,7 +26,7 @@ export class QuotePage extends Component {
         </List.Content>
         </List.Item>
         </List>
-        <Step.Group fluid>
+        <Step.Group size='mini' fluid>
         <Step
         active
           icon='dollar'
@@ -44,7 +44,7 @@ export class QuotePage extends Component {
         />
         <Step
           disabled
-          icon='dollar'
+          icon='payment'
           title='Payment'
         />
         <Step
@@ -199,28 +199,23 @@ export class QuotePage extends Component {
     </Form.Field>
     <Form.Group grouped>
       <label>Do You Currently Have A General Liability Policy?</label>
-      <Form.Field label='Yes' control='input' type='radio' name='htmlRadios' />
-      <Form.Field label='No' control='input' type='radio' name='htmlRadios' />
+      <Form.Field label='Yes' control='input' type='radio' name='existingPolicy' />
+      <Form.Field label='No' control='input' type='radio' name='existingPolicy' />
     </Form.Group>
         <Form.Group grouped>
       <label>Does your Business Sell Alcohol, Tobacco, Or Firearms?</label>
-      <Form.Field label='Yes' control='input' type='radio' name='htmlRadios' />
-      <Form.Field label='No' control='input' type='radio' name='htmlRadios' />
-    </Form.Group>
-    <Form.Group grouped>
-    <label>Do You Currently Have A General Liability Policy?</label>
-    <Form.Field label='Yes' control='input' type='radio' name='htmlRadios' />
-    <Form.Field label='No' control='input' type='radio' name='htmlRadios' />
+      <Form.Field label='Yes' control='input' type='radio' name='alcoholTobaccoOrFirearms' />
+      <Form.Field label='No' control='input' type='radio' name='alcoholTobaccoOrFirearms' />
     </Form.Group>
     <Form.Group grouped>
     <label>Have You Had A General Liability Claim Within 5 Years?</label>
-    <Form.Field label='Yes' control='input' type='radio' name='htmlRadios' />
-    <Form.Field label='No' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='Yes' control='input' type='radio' name='claim5Years' />
+    <Form.Field label='No' control='input' type='radio' name='claim5Years' />
     </Form.Group>
     <Form.Group grouped>
     <label>Have You Been Cancelled, Declined, Or Refused Coverage Within 5 Years?</label>
-    <Form.Field label='Yes' control='input' type='radio' name='htmlRadios' />
-    <Form.Field label='No' control='input' type='radio' name='htmlRadios' />
+    <Form.Field label='Yes' control='input' type='radio' name='refused' />
+    <Form.Field label='No' control='input' type='radio' name='refused' />
     </Form.Group>
     <Form.Group grouped>
     <label>Deductible</label>
