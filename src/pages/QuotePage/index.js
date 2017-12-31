@@ -16,28 +16,6 @@ export class QuotePage extends Component {
 
   render() {
     return (
-      <div>
-       <Container style={style.last}>
-      <Step.Group fluid>
-        <Step
-          icon='plane'
-          title='Shipping'
-          description='Choose your shipping options'
-        />
-        <Step
-          active
-          icon='dollar'
-          title='Billing'
-          description='Enter billing information'
-        />
-        <Step
-          disabled
-          icon='info circle'
-          title='Confirm Order'
-          description='Verify order details'
-        />
-      </Step.Group>
-    </Container>
       <Container page>
         <Header as="h1" content="Small Business General Liability" subheader="We Cover Start-Ups - Home Based Businesses - Retail and Commercial Locations And Many Others..." />
         <Header as="h3" content="Lowest Rates in the Industry – Guaranteed!" />
@@ -48,9 +26,38 @@ export class QuotePage extends Component {
         </List.Content>
         </List.Item>
         </List>
-        <Segment>
-             
-        </Segment>
+        <Step.Group fluid>
+        <Step
+        active
+          icon='dollar'
+          title='Quote'
+        />  
+        <Step
+          disabled
+          icon='info circle'
+          title='Application'
+        />
+        <Step
+          disabled
+          icon='info circle'
+          title='Confirmation'
+        />
+        <Step
+          disabled
+          icon='dollar'
+          title='Payment'
+        />
+        <Step
+          disabled
+          icon='dollar'
+          title='Receipt'
+        />
+        <Step
+          disabled
+          icon='info circle'
+          title='Certificate'
+        />
+      </Step.Group>
           <Form>
           <Form.Field control='select' label='Choose Your Industry'>
           <option>Select One</option>
@@ -240,10 +247,9 @@ export class QuotePage extends Component {
     </Form.Group>
     <Button content='Click Here for Annual QUOTE' secondary />
     <br />
-    <Button content='Fill Out Online APPLICATION' primary />
+    <Button content='Fill Out Online APPLICATION' primary disabled/>
   </Form>
       </Container>
-      </div>
     )
   }
 }
