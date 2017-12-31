@@ -16,6 +16,28 @@ export class QuotePage extends Component {
 
   render() {
     return (
+      <div>
+       <Container style={style.last}>
+      <Step.Group fluid>
+        <Step
+          icon='plane'
+          title='Shipping'
+          description='Choose your shipping options'
+        />
+        <Step
+          active
+          icon='dollar'
+          title='Billing'
+          description='Enter billing information'
+        />
+        <Step
+          disabled
+          icon='info circle'
+          title='Confirm Order'
+          description='Verify order details'
+        />
+      </Step.Group>
+    </Container>
       <Container page>
         <Header as="h1" content="Small Business General Liability" subheader="We Cover Start-Ups - Home Based Businesses - Retail and Commercial Locations And Many Others..." />
         <Header as="h3" content="Lowest Rates in the Industry – Guaranteed!" />
@@ -27,40 +49,40 @@ export class QuotePage extends Component {
         </List.Item>
         </List>
         <Segment>
-          This is the QuotePage Component.
+             
         </Segment>
           <Form>
           <Form.Field control='select' label='Choose Your Industry'>
           <option>Select One</option>
           <option disabled>PRODUCTS</option>
-          <option value='art'>Art, Books and Music NAICS 4512 (.7)'</option>
-<option value='NAICS 441'>Motor Vehicle and Parts Dealers NAICS</option>
-<option value='NAICS 442'>Furniture and Furnishings Stores NAICS 442 (.75)</option>
-<option value='NAICS 443'>Electronics and Appliance Stores NAICS 443 (.9)</option>
-<option value='NAICS 444'>Building Material and Supplies Dealers NAICS 444 (1.15)</option>
-<option value='NAICS 445'>Food and Beverage NAICS 445 (1.25)</option>
-<option value='NAICS 4461'>Health and Personal Products NAICS 4461 (.85)</option>
-<option value='NAICS 4471'>Gas and Food Stores NAICS 4471 (1.35)</option>
-<option value='NAICS 448'>Clothing and Accessories Stores NAICS 448 (.8)</option>
-<option value='NAICS 4511'>Sporting Goods and Hobby Stores NAICS 4511 (.9)</option>
-<option value='NAICS 4531'>Florists & Nursery NAICS 4531 (.85)</option>
-<option value='NAICS 4532'>Office Supplies, Stationery, and Gift Stores NAICS 4532 (.85)</option>
-<option value='NAICS 4532'>Pet Supply & Services NAICS 4532 (1.05)</option>
+          <option value='art'>Art, Books and Music NAICS 4512</option>
+<option value='NAICS 441'>Motor Vehicle and Parts Dealers NAICS 441</option>
+<option value='NAICS 442'>Furniture and Furnishings Stores NAICS 442</option>
+<option value='NAICS 443'>Electronics and Appliance Stores NAICS 443</option>
+<option value='NAICS 444'>Building Material and Supplies Dealers NAICS 444</option>
+<option value='NAICS 445'>Food and Beverage NAICS 445</option>
+<option value='NAICS 4461'>Health and Personal Products NAICS 4461</option>
+<option value='NAICS 4471'>Gas and Food Stores NAICS 4471</option>
+<option value='NAICS 448'>Clothing and Accessories Stores NAICS 448</option>
+<option value='NAICS 4511'>Sporting Goods and Hobby Stores NAICS 4511</option>
+<option value='NAICS 4531'>Florists & Nursery NAICS 4531</option>
+<option value='NAICS 4532'>Office Supplies, Stationery, and Gift Stores NAICS 4532</option>
+<option value='NAICS 4532'>Pet Supply & Services NAICS 4532</option>
 <option value='NAICS 4539'>Other Products NAICS 4539</option>
 <option disabled>SERVICES</option>
-<option value='NAICS 812'>Personal Care Services NAICS 812 (1.1)</option>
-<option value='NAICS 44'>Financial Services NAICS 521-525 (1.4)</option>
-<option value='NAICS 44'>Lodging NAICS 7211 (1.1)</option>
-<option value='NAICS 44'>Entertainment Facilities NAICS 3121 (1.35)</option>
-<option value='NAICS 44'>Repair Services NAICS 811 (.9)</option>
-<option value='NAICS 44'>Automotive Services NAICS 441 (1.15)</option>
-<option value='NAICS 44'>Parking or Storage Facility NAICS 493 (.7)</option>
-<option value='NAICS 44'>Contractors Services NAICS 2389 (1.05)</option>
-<option value='NAICS 44'>Manufacturing & Production NAICS 31-32-33 (1) </option>
-<option value='NAICS 44'>Warehouse & Freight NAICS 493 (.8)</option>
-<option value='NAICS 44'>Counseling & Education NAICS 813 (.95)</option>
-<option value='NAICS 44'>Child or Senior Care NAICS 814 (1.25)</option>
-<option value='NAICS 44'>Other Services NAICS 453 (Hold for CS)</option>
+<option value='NAICS 812'>Personal Care Services NAICS 812</option>
+<option value='NAICS 44'>Financial Services NAICS 521-525</option>
+<option value='NAICS 44'>Lodging NAICS 7211</option>
+<option value='NAICS 44'>Entertainment Facilities NAICS 3121</option>
+<option value='NAICS 881'>Repair Services NAICS 811</option>
+<option value='NAICS 441'>Automotive Services NAICS 441</option>
+<option value='NAICS 44'>Parking or Storage Facility NAICS 493</option>
+<option value='NAICS 44'>Contractors Services NAICS 2389</option>
+<option value='NAICS 44'>Manufacturing & Production NAICS 31-32-33</option>
+<option value='NAICS 44'>Warehouse & Freight NAICS 493</option>
+<option value='NAICS 44'>Counseling & Education NAICS 813</option>
+<option value='NAICS 44'>Child or Senior Care NAICS 814</option>
+<option value='NAICS 44'>Other Services NAICS 453</option>
 </Form.Field>
     
     <Form.Field control='select' label='Number of Years in your Industry'>
@@ -216,14 +238,12 @@ export class QuotePage extends Component {
     <Form.Field label='$3,000,000' control='input' type='radio' name='htmlRadios' />
     <Form.Field label='$5,000,000' control='input' type='radio' name='htmlRadios' />
     </Form.Group>
-
-    <Form.Field>
-      <Checkbox label='I agree to the Terms and Conditions' />
-    </Form.Field>
     <Button content='Click Here for Annual QUOTE' secondary />
+    <br />
     <Button content='Fill Out Online APPLICATION' primary />
   </Form>
       </Container>
+      </div>
     )
   }
 }
