@@ -16,78 +16,49 @@ export class PublicHome extends Component {
 
   render() {
     return (
-      <Container>
-        <MainHeader />
-        <Menu stackable>
-        <Menu.Item>
-          <Link to="/" children="Home" />
-        </Menu.Item>
-        <Menu.Item>
-          <Link to="/quote" children="QUOTE" />
-        </Menu.Item>
-        <Menu.Item>
-          <Link to="/about-us" children="About" />
-         </Menu.Item>
-          <Menu.Item>
-          <Link to="/contact" children="Contact" />
-           </Menu.Item>
-          <Menu.Item>
-          <Link to="/faq" children="FAQ" />
-          </Menu.Item>
-          <Menu.Item>
-          <Link to="/industries" children="Industries" />
-          </Menu.Item>
-          <Menu.Item>
-          <Link to="/industries/plastics" children="Industry Page" />
-          </Menu.Item>
-          <Menu.Item>
-          <Link to="/purchase-agreement" children="Purchase Agreement" />
-          </Menu.Item>
-          <Menu.Item>
-          <Link to="/referral" children="Referral" />
-          </Menu.Item>
-          <Menu.Item>
-          <Link to="/refunds-and-returns" children="Refunds" />
-          </Menu.Item>
-          <Menu.Item>
-          <Link to="/terms-of-use" children="Terms" />
-          </Menu.Item>
-          <Menu.Item>
-          <Link to="/testimonials" children="Testimonials" />
-          </Menu.Item>
-        </Menu>
+      <div>
+              <Visibility
+          onBottomPassed={this.showFixedMenu}
+          onBottomVisible={this.hideFixedMenu}
+          once={false}
+        >
+      <Segment inverted textAlign='center' style={{ minHeight: 700, padding: '1em 0em' }} vertical >
 
-          <Segment inverted vertical style={{ padding: '5em 0em' }}>
-          <Container>
-            <Grid divided inverted stackable>
-              <Grid.Row>
-                <Grid.Column width={3}>
-                  <Header inverted as='h4' content='About' />
-                  <List link inverted>
-                    <List.Item as='a'>Sitemap</List.Item>
-                    <List.Item as='a'>Contact Us</List.Item>
-                    <List.Item as='a'>Religious Ceremonies</List.Item>
-                    <List.Item as='a'>Gazebo Plans</List.Item>
-                  </List>
-                </Grid.Column>
-                <Grid.Column width={3}>
-                  <Header inverted as='h4' content='Services' />
-                  <List link inverted>
-                    <List.Item as='a'>Banana Pre-Order</List.Item>
-                    <List.Item as='a'>DNA FAQ</List.Item>
-                    <List.Item as='a'>How To Access</List.Item>
-                    <List.Item as='a'>Favorite X-Men</List.Item>
-                  </List>
-                </Grid.Column>
-                <Grid.Column width={7}>
-                  <Header as='h4' inverted>Footer Header</Header>
-                  <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Container>
-        </Segment>
-                <Segment style={{ padding: '8em 0em' }} vertical>
+       <Container>
+              <Menu inverted pointing secondary size='large'>
+                <Menu.Item as='a' active>Home</Menu.Item>
+                <Menu.Item as='a'>Quote</Menu.Item>
+                <Menu.Item as='a'>About</Menu.Item>
+                <Menu.Item as='a'>Contact</Menu.Item>
+                <Menu.Item as='a'>FAQ</Menu.Item>
+                <Menu.Item as='a'>Industries</Menu.Item>
+                <Menu.Item position='right'>
+                  <Button as='a' color='blue' >Log in</Button>
+                  <Button as='a'   style={{ marginLeft: '0.5em' }}>Sign Up</Button>
+                </Menu.Item>
+              </Menu>
+      </Container>
+      <Container text>
+              <Header
+                as='h1'
+                content='Small Business General Liability'
+                inverted
+                style={{ fontSize: '3em', fontWeight: 'normal', marginBottom: 0, marginTop: '3em' }}
+              />
+              <Header
+                as='h2'
+                content='Lowest rates in the Industry, Guaranteed'
+                inverted
+                style={{ fontSize: '1.7em', fontWeight: 'normal' }}
+              />
+              <Button primary size='huge'>
+                Get a Quote
+                <Icon name='right arrow' />
+              </Button>
+            </Container>
+            </Segment>
+            </Visibility>
+<Segment style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={8}>
@@ -132,7 +103,37 @@ Business today from ACE Financial. Just click on the "Get A Quote" link above to
             </Grid.Row>
           </Grid>
         </Segment>
-      </Container>
+          <Segment inverted vertical style={{ padding: '5em 0em' }}>
+          <Container>
+            <Grid divided inverted stackable>
+              <Grid.Row>
+                <Grid.Column width={3}>
+                  <Header inverted as='h4' content='About' />
+                  <List link inverted>
+                    <List.Item as='a'>Sitemap</List.Item>
+                    <List.Item as='a'>Contact Us</List.Item>
+                    <List.Item as='a'>Religious Ceremonies</List.Item>
+                    <List.Item as='a'>Gazebo Plans</List.Item>
+                  </List>
+                </Grid.Column>
+                <Grid.Column width={3}>
+                  <Header inverted as='h4' content='Services' />
+                  <List link inverted>
+                    <List.Item as='a'>Banana Pre-Order</List.Item>
+                    <List.Item as='a'>DNA FAQ</List.Item>
+                    <List.Item as='a'>How To Access</List.Item>
+                    <List.Item as='a'>Favorite X-Men</List.Item>
+                  </List>
+                </Grid.Column>
+                <Grid.Column width={7}>
+                  <Header as='h4' inverted>Footer Header</Header>
+                  <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
+        </Segment>
+      </div>
     )
   }
 }
