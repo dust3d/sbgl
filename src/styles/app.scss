@@ -3,3 +3,22 @@ $badass: #bada55;
 .badass {
   color: $badass;
 }
+
+.homepage {
+  height: 50%;
+  background-image: url('business-owner.jpg') !important;
+  background-position: center;
+  background-repeat:  no-repeat;
+  background-size:  cover !important;
+}
+
+.foopage {
+	background-image: url('cs.jpg');
+}
+
+.homepage-header{ background:rgba(255,255,255,0.5) !important;
+margin-top: 200px !important; }
+
+.customer-service{
+	content: url('cs.jpg');
+}
