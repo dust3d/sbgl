@@ -86,31 +86,39 @@ const yearsIndustryOptions = [
 { value:'8+', text:'8+ Years', key:'8'}
 ]
 
+const payrollOptions = [
+{key: 'payroll1', value: '100K or Less', text:'100K or Less', name: 'payroll'},
+{key: 'payroll2', value: '101-150K', text: '101-150', name: 'payroll'},
+{key: 'payroll3', value: '151-250K', text: '151-250', name: 'payroll'},
+{key: 'payroll4', value: '101-200K', text: '251-500', name: 'payroll'},
+{key: 'payroll5', value: '501+', text: '501+', name: 'payroll'}
+]
+
+const grossIncomeOptions = [
+{key: 'income1', value:'50K or Less', text: '50K or Less'},
+{key: 'income2', value:'51-75K', text:'51-75'},
+{key: 'income3', value:'76-100K', text:'76-100'},
+{key: 'income4', value:'101-200K', text:'101-200K'},
+{key: 'income5', value:'201K+', text: '201K+'}
+]
+
 export class QuotePage extends Component {
   constructor() {
     super();
     this.state = {
       industry: '',
+      payroll: '',
       quote: 0
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   static contextTypes = {
     runtime: types.object
   }
 
-  componentWillMount() {
-    const { runtime } = this.context
-    const { history } = this.props
-    runtime.set('history', history)
-  }
-
-  handleIndustryChange(e) {
-    alert('this changed' + e.target);
-   this.setState({industry: e.target.value});
-   console.log('industry' + this.state.industry);
+  handleFieldChange = (e, { name, value } = {}) => {
+    this.setState({ error: false, errorMessage: undefined, [name]: value })
   }
 
   handleSubmit(event) {
@@ -121,6 +129,8 @@ export class QuotePage extends Component {
   }
 
   render() {
+    const { error = false, errorMessage } = this.state
+
     return (
       <div>
       <Container>
@@ -180,142 +190,160 @@ export class QuotePage extends Component {
                 title='Certificate'
                 />
                 </Step.Group>
-                <Form success onSubmit={this.handleSubmit}>
+                <Form 
+                error={error} 
+                onSubmit={e => e.preventDefault()}>
+                {error && (
+                  <Message error header="Login Error" content={errorMessage} />
+                  )}
 
-                <Form.Select options={industryOptions} label='Select your Industry' placeholder='Select one' onChange={this.handleIndustryChange} /> 
-                <Form.Select options={yearsIndustryOptions} label='Number of Years in your Industry'/>
+                  <Form.Select 
+                  options={industryOptions} 
+                  label='Select your Industry' 
+                  placeholder='Select one' 
+                  onChange={this.handleFieldChange.bind(this)} 
+                  /> 
+                  <Form.Select 
+                  options={yearsIndustryOptions} 
+                  label='Number of Years in your Industry'
+                  onChange={this.handleFieldChange.bind(this)} 
+                  />
 
-                <Form.Select options={unitedStates} placeholder='Select Your State' label='State You Operate In or Your Business Location' placeholder='Please select your state' />
+                  <Form.Select 
+                  options={unitedStates} 
+                  placeholder='Select Your State' 
+                  label='State You Operate In or Your Business Location' 
+                  placeholder='Please select your state' 
+                  />
 
-                <Form.Select label='Gross Annual Income (Owner Only)' options={[
-                  {value:'50K or Less', text: '50K or Less'},
-                  {value:'51-75K', text:'51-75'},
-                  {value:'76-100K', text:'76-100'},
-                  {value:'101-200K', text:'101-200K'},
-                  {value:'201K+', text: '201K+'}]} />
+                  <Form.Select 
+                  label='Gross Annual Income (Owner Only)' 
+                  options={grossIncomeOptions}
+                  onChange={this.handleFieldChange.bind(this)} 
 
-                  <Form.Select label='Gross Annual Payroll (Including Owner)' options={[
-                    {value: '100K or Less', text:'100K or Less'},
-                    {value: '101-150K', text: '101-150'},
-                    {value: '151-250K', text: '151-250'},
-                    {value: '101-200K', text: '251-500'},
-                    {value: '501+', text: '501+'}
+                  />
+
+                  <Form.Select 
+                  label='Gross Annual Payroll (Including Owner)' 
+                  options={payrollOptions} 
+                  placeholder='Select one' 
+                  onChange={this.handleFieldChange.bind(this)} 
+                  />
+
+                  <Form.Select label='Gross Annual Business Revenue' placeholder='Select Annual Gross Revenue' options={[
+                    {key: '100K or Less', value: '100K or Less', text:'100K or Less'},
+                    {key: '101-150K', value: '101-150K', text: '101-150'},
+                    {key: '151-250K', value: '151-250K', text: '151-250'},
+                    {key: '101-200K', value: '101-200K', text: '251-500'},
+                    {key: '501+', value: '501+', text: '501-1Million'},
+                    {key: '1MM+', value: '1MM+', text: '1 Million+'}
                     ]} />
-
-                    <Form.Select label='Gross Annual Business Revenue' placeholder='Select Annual Gross Revenue' options={[
-                      {key: '100K or Less', value: '100K or Less', text:'100K or Less'},
-                      {key: '101-150K', value: '101-150K', text: '101-150'},
-                      {key: '151-250K', value: '151-250K', text: '151-250'},
-                      {key: '101-200K', value: '101-200K', text: '251-500'},
-                      {key: '501+', value: '501+', text: '501-1Million'},
-                      {key: '1MM+', value: '1MM+', text: '1 Million+'}
+                    <Form.Select label='Total Number Of Employees (Including Owner)' placeholder='Select Number of Employees' options={[
+                      {key: '1', value: '1', text: '1'},
+                      {key: '2', value: '2', text: '2'},
+                      {key: '3', value: '3', text: '3'},
+                      {key: '4', value: '4', text: '4'},
+                      {key: '5', value: '5', text: '5'},
+                      {key: '6', value: '6', text: '6'},
+                      {key: '7', value: '7', text: '7'},
+                      {key: '8', value: '8', text: '8'},
+                      {key: '9', value: '9', text: '9'},
+                      {key: '10', value: '10', text: '>10'},
+                      {key: '11', value: '11', text: '>11+'}
                       ]} />
-                      <Form.Select label='Total Number Of Employees (Including Owner)' placeholder='Select Number of Employees' options={[
-                        {key: '1', value: '1', text: '1'},
-                        {key: '2', value: '2', text: '2'},
-                        {key: '3', value: '3', text: '3'},
-                        {key: '4', value: '4', text: '4'},
-                        {key: '5', value: '5', text: '5'},
-                        {key: '6', value: '6', text: '6'},
-                        {key: '7', value: '7', text: '7'},
-                        {key: '8', value: '8', text: '8'},
-                        {key: '9', value: '9', text: '9'},
-                        {key: '10', value: '10', text: '>10'},
-                        {key: '11', value: '11', text: '>11+'}
+
+                      <Form.Select label='Amount Of Foot Traffic In Your Business per Week' placeholder='Select' options={[
+                        {key: 'under50', value: 'under 50', text: 'under 50'},
+                        {key: '51-200', value: '51-200', text: '51-200'},
+                        {key: '201-500', value: '201-500', text: '201-500'},
+                        {key: '501-1000', value: '501- 1000', text: '501-1000'},
+                        {key: '1000+', value: '1000+', text: '1000+'}
                         ]} />
 
-                        <Form.Select label='Amount Of Foot Traffic In Your Business per Week' placeholder='Select' options={[
-                          {key: 'under50', value: 'under 50', text: 'under 50'},
-                          {key: '51-200', value: '51-200', text: '51-200'},
-                          {key: '201-500', value: '201-500', text: '201-500'},
-                          {key: '501-1000', value: '501- 1000', text: '501-1000'},
-                          {key: '1000+', value: '1000+', text: '1000+'}
-                          ]} />
+                        <Form.Group grouped>
+                        <label>Do You Currently Have A General Liability Policy?</label>
+                        <Form.Field label='Yes' control='input' type='radio' name='existingPolicy' />
+                        <Form.Field label='No' control='input' type='radio' name='existingPolicy' />
+                        </Form.Group>
+                        <Form.Group grouped>
+                        <label>Does your Business Sell Alcohol, Tobacco, Or Firearms?</label>
+                        <Form.Field label='Yes' control='input' type='radio' name='alcoholTobaccoOrFirearms' />
+                        <Form.Field label='No' control='input' type='radio' name='alcoholTobaccoOrFirearms' />
+                        </Form.Group>
+                        <Form.Group grouped>
+                        <label>Have You Had A General Liability Claim Within 5 Years?</label>
+                        <Form.Field label='Yes' control='input' type='radio' name='claim5Years' />
+                        <Form.Field label='No' control='input' type='radio' name='claim5Years' />
+                        </Form.Group>
+                        <Form.Group grouped>
+                        <label>Have You Been Cancelled, Declined, Or Refused Coverage Within 5 Years?</label>
+                        <Form.Field label='Yes' control='input' type='radio' name='refused' />
+                        <Form.Field label='No' control='input' type='radio' name='refused' />
+                        </Form.Group>
+                        <Form.Group grouped>
+                        <label>Deductible</label>
+                        <Form.Field label='$500' control='input' type='radio' name='deductible' />
+                        <Form.Field label='$1000' control='input' type='radio' name='deductible' />
+                        <Form.Field label='$2500' control='input' type='radio' name='deductible' />
+                        <Form.Field label='$5000' control='input' type='radio' name='deductible' />
+                        </Form.Group>
+                        <Form.Group grouped>
+                        <label>Incident Max Benefit</label>
+                        <Form.Field label='$100,000' control='input' type='radio' name='maxBenefit' />
+                        <Form.Field label='$500,000' control='input' type='radio' name='maxBenefit' />
+                        <Form.Field label='$1,000,000 ' control='input' type='radio' name='maxBenefit' />
+                        <Form.Field label='$2,000,000' control='input' type='radio' name='maxBenefit' />
+                        </Form.Group>
+                        <Form.Group grouped>
+                        <label>Aggregate Max Benefit</label>
+                        <Form.Field label='$100,000' control='input' type='radio' name='aggMaxBenefit' />
+                        <Form.Field label='$500,000' control='input' type='radio' name='aggMaxBenefit' />
+                        <Form.Field label='$1,000,000 ' control='input' type='radio' name='aggMaxBenefit' />
+                        <Form.Field label='$2,000,000' control='input' type='radio' name='aggMaxBenefit' />
+                        <Form.Field label='$3,000,000' control='input' type='radio' name='aggMaxBenefit' />
+                        <Form.Field label='$5,000,000' control='input' type='radio' name='aggMaxBenefit' />
+                        </Form.Group>
+                        <Button content='Click Here for Annual QUOTE' primary />
 
-                          <Form.Group grouped>
-                          <label>Do You Currently Have A General Liability Policy?</label>
-                          <Form.Field label='Yes' control='input' type='radio' name='existingPolicy' />
-                          <Form.Field label='No' control='input' type='radio' name='existingPolicy' />
-                          </Form.Group>
-                          <Form.Group grouped>
-                          <label>Does your Business Sell Alcohol, Tobacco, Or Firearms?</label>
-                          <Form.Field label='Yes' control='input' type='radio' name='alcoholTobaccoOrFirearms' />
-                          <Form.Field label='No' control='input' type='radio' name='alcoholTobaccoOrFirearms' />
-                          </Form.Group>
-                          <Form.Group grouped>
-                          <label>Have You Had A General Liability Claim Within 5 Years?</label>
-                          <Form.Field label='Yes' control='input' type='radio' name='claim5Years' />
-                          <Form.Field label='No' control='input' type='radio' name='claim5Years' />
-                          </Form.Group>
-                          <Form.Group grouped>
-                          <label>Have You Been Cancelled, Declined, Or Refused Coverage Within 5 Years?</label>
-                          <Form.Field label='Yes' control='input' type='radio' name='refused' />
-                          <Form.Field label='No' control='input' type='radio' name='refused' />
-                          </Form.Group>
-                          <Form.Group grouped>
-                          <label>Deductible</label>
-                          <Form.Field label='$500' control='input' type='radio' name='deductible' />
-                          <Form.Field label='$1000' control='input' type='radio' name='deductible' />
-                          <Form.Field label='$2500' control='input' type='radio' name='deductible' />
-                          <Form.Field label='$5000' control='input' type='radio' name='deductible' />
-                          </Form.Group>
-                          <Form.Group grouped>
-                          <label>Incident Max Benefit</label>
-                          <Form.Field label='$100,000' control='input' type='radio' name='maxBenefit' />
-                          <Form.Field label='$500,000' control='input' type='radio' name='maxBenefit' />
-                          <Form.Field label='$1,000,000 ' control='input' type='radio' name='maxBenefit' />
-                          <Form.Field label='$2,000,000' control='input' type='radio' name='maxBenefit' />
-                          </Form.Group>
-                          <Form.Group grouped>
-                          <label>Aggregate Max Benefit</label>
-                          <Form.Field label='$100,000' control='input' type='radio' name='aggMaxBenefit' />
-                          <Form.Field label='$500,000' control='input' type='radio' name='aggMaxBenefit' />
-                          <Form.Field label='$1,000,000 ' control='input' type='radio' name='aggMaxBenefit' />
-                          <Form.Field label='$2,000,000' control='input' type='radio' name='aggMaxBenefit' />
-                          <Form.Field label='$3,000,000' control='input' type='radio' name='aggMaxBenefit' />
-                          <Form.Field label='$5,000,000' control='input' type='radio' name='aggMaxBenefit' />
-                          </Form.Group>
-                          <Button content='Click Here for Annual QUOTE' primary />
-
-                          </Form>
-                          <Message
-                          success
-                          size='large'
-                          header={'Quote Calculated'}
-                          content={'Here is your annual quote: ' +  this.state.quote}
-                          />
-                          </Container>
-                          <Segment inverted vertical style={{ padding: '5em 0em' }}>
-                          <Container>
-                          <Grid divided inverted stackable>
-                          <Grid.Row>
-                          <Grid.Column width={3}>
-                          <List link inverted>
-                          <List.Item as={Link} to='/'>Home</List.Item>
-                          <List.Item as={Link} to='/quote'>Instant Quote</List.Item>
-                          <List.Item as={Link} to='/referral'>$50 Referral</List.Item>
-                          <List.Item as={Link} to='/faq'>FAQ</List.Item>
-                          </List>
-                          </Grid.Column>
-                          <Grid.Column width={3}>
-                          <List link inverted>
-                          <List.Item as={Link} to='/testimonials'>Testimonials</List.Item>
-                          <List.Item as={Link} to='/login'>Login</List.Item>
-                          <List.Item as={Link} to='/signup'>Sign Up</List.Item>
-                          <List.Item as={Link} to='/contact'>Contact Us</List.Item>
-                          </List>
-                          </Grid.Column>
-                          <Grid.Column width={7}>
-                          <Header as='h4' inverted>Small Business General Liability</Header>
-                          <p>Lowest rates in the industry &mdash; Guaranteed!</p>
-                          </Grid.Column>
-                          </Grid.Row>
-                          </Grid>
-                          </Container>
-                          </Segment>
-                          </div>
-                          )
-                        }
+                        </Form>
+                        <Message
+                        success
+                        size='large'
+                        header={'Quote Calculated'}
+                        content={'Here is your annual quote: ' +  this.state.quote}
+                        />
+                        </Container>
+                        <Segment inverted vertical style={{ padding: '5em 0em' }}>
+                        <Container>
+                        <Grid divided inverted stackable>
+                        <Grid.Row>
+                        <Grid.Column width={3}>
+                        <List link inverted>
+                        <List.Item as={Link} to='/'>Home</List.Item>
+                        <List.Item as={Link} to='/quote'>Instant Quote</List.Item>
+                        <List.Item as={Link} to='/referral'>$50 Referral</List.Item>
+                        <List.Item as={Link} to='/faq'>FAQ</List.Item>
+                        </List>
+                        </Grid.Column>
+                        <Grid.Column width={3}>
+                        <List link inverted>
+                        <List.Item as={Link} to='/testimonials'>Testimonials</List.Item>
+                        <List.Item as={Link} to='/login'>Login</List.Item>
+                        <List.Item as={Link} to='/signup'>Sign Up</List.Item>
+                        <List.Item as={Link} to='/contact'>Contact Us</List.Item>
+                        </List>
+                        </Grid.Column>
+                        <Grid.Column width={7}>
+                        <Header as='h4' inverted>Small Business General Liability</Header>
+                        <p>Lowest rates in the industry &mdash; Guaranteed!</p>
+                        </Grid.Column>
+                        </Grid.Row>
+                        </Grid>
+                        </Container>
+                        </Segment>
+                        </div>
+                        )
                       }
+                    }
 
-                      export default QuotePage
+                    export default QuotePage
