@@ -1,4 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
+import ApplicationPage from 'pages/ApplicationPage'
 import LoginPage from 'pages/LoginPage'
 import PublicHome from 'pages/PublicHome'
 import AboutUs from 'pages/AboutUs'
@@ -17,6 +18,7 @@ import QuotePage from 'pages/QuotePage'
 export const PublicApp = () => (
   <Switch>
     <Route path="/" exact component={PublicHome} />
+    <Route path="/application" exact component={ApplicationPage} />
     <Route path="/quote" exact component={QuotePage} />
     <Route path="/about-us" exact component={AboutUs} />
     <Route path="/contact" exact component={ContactUs} />
