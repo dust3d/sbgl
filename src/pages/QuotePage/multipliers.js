@@ -210,6 +210,14 @@ export const grossAnnualRevenueOptions = [
 {key: '1MM+', value: '1MM+', text: '1 Million+'}
 ];
 
+export const grossAnnualRevenueMultiplier = {
+'100K or Less': .95,
+'101-150K': 1,
+'151-250K': 1.05,
+'101-200K': 1.1,
+'501+': 1.15
+};
+
 export const numberOfEmployeesOptions = [
 {key: '1', value: '1', text: '1'},
 {key: '2', value: '2', text: '2'},
@@ -224,6 +232,19 @@ export const numberOfEmployeesOptions = [
 {key: '11', value: '11', text: '>11+'}
 ];
 
+export const numberOfEmployeesMultiplier = {
+  '1' : 1,
+  '2' : 1.02, 
+  '3' : 1.4, 
+  '4' : 1.06, 
+  '5' : 1.08, 
+  '6' : 1.1, 
+  '7' : 1.12, 
+  '8' : 1.14, 
+  '9' : 1.16, 
+  '10': 1.18
+};
+
 export const footTrafficOptions = [
 {key: 'foot50', value: 'foot50', text: 'under 50'},
 {key: 'foot51', value: 'foot51', text: '51-200'},
@@ -232,7 +253,7 @@ export const footTrafficOptions = [
 {key: 'foot1000', value: 'foot1000', text: '1000+'}
 ];
 
-export const footTrafficQuoteWeighting = {
+export const footTrafficMultiplier = {
   'foot50': 1.2,
   'foot51': 1.5,
   'foot201':1.6,
@@ -240,3 +261,25 @@ export const footTrafficQuoteWeighting = {
   'foot1000':5
 };
 
+export const deductibleMultiplier = {
+'$500' : 1.1,
+'$1000': 1.05,
+'$2500': 1,
+'$5000': .95
+};
+
+export const maxBenefitMultiplier = {
+'$100,000' : .85,
+'$500,000': .93,
+'$1,000,000': 1,
+'$2,000,000': 1.1
+};
+
+export const aggMaxBenefitMultiplier = {
+'$100,000' : 1,
+'$500,000': 1,
+'$1,000,000': 1.08,
+'$2,000,000': 1.08,
+'$3,000,000': 1.09,
+'$5,000,000': 1.17
+};

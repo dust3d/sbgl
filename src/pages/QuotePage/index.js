@@ -7,14 +7,19 @@ import {
   , unitedStates
   , industryOptionsMultiplier
   , industryOptions
-  , footTrafficQuoteWeighting
+  , footTrafficMultiplier
   , footTrafficOptions
   , numberOfEmployeesOptions
+  , numberOfEmployeesMultiplier
   , grossAnnualRevenueOptions
+  , grossAnnualRevenueMultiplier
   , unitedStatesMultiplier
   , yearsIndustryMultiplier
   , payrollMultiplier
   , grossIncomeMultiplier
+  , deductibleMultiplier
+  , aggMaxBenefitMultiplier
+  , maxBenefitMultiplier
 } from './multipliers.js'
 
 export class QuotePage extends Component {
@@ -40,7 +45,7 @@ export class QuotePage extends Component {
       error: false,
       errorMessage: undefined
     };
-        this.calculateQuote = this.calculateQuote.bind(this);
+    this.calculateQuote = this.calculateQuote.bind(this);
 
   }
 
@@ -50,17 +55,31 @@ export class QuotePage extends Component {
   }
 
   handleFieldChange(e, { name, value } = {}) {
+    console.log('yo bro', name, value)
     this.setState({ error: false, errorMessage: undefined, [name]: value });
   }
 
+  handleRadioChange(e) {
+    console.log('radio changed', e.target.name, e.target.value);
+    this.setState({ error: false, errorMessage: undefined, [e.target.name]: e.target.value });
+  }
+
   calculateQuote(state) {
-    console.log('this is here', state.totalPayroll);
-    let quote = 500*industryOptionsMultiplier[state.industry]
-    *footTrafficQuoteWeighting[state.footTraffic]
+    console.log('this is here', state.existingPolicy);
+    let quote = Math.round(500*industryOptionsMultiplier[state.industry]
+    *footTrafficMultiplier[state.footTraffic]
     *unitedStatesMultiplier[state.stateOfOperation]
     *yearsIndustryMultiplier[state.yearsIndustry]
     *payrollMultiplier[state.totalPayroll]
     *grossIncomeMultiplier[state.ownerIncome]
+    *(state.existingPolicy === 'yes' ? 0.95 : 1.1)
+    *(state.alcoholTobaccoOrFirearms === 'yes' ? 1.2 : 1)
+    *(state.claim5Years === 'yes' ? 0 : 1)
+    *(state.refused === 'yes' ? 0 : 1)
+    *(deductibleMultiplier[state.deductible])
+    *(maxBenefitMultiplier[state.maxBenefit])
+    *(aggMaxBenefitMultiplier[state.aggMaxBenefit])
+    )
     console.log('hey quote', quote);
     return quote;
   }
@@ -213,7 +232,10 @@ export class QuotePage extends Component {
                   name='footTraffic'
                   />
 
-                  <Form.Group grouped>
+                  <Form.Group 
+                  grouped 
+                  onChange={this.handleRadioChange.bind(this)}
+                  >
                   <label>Do You Currently Have A General Liability Policy?</label>
                   <Form.Field 
                   label='Yes' 
@@ -221,66 +243,111 @@ export class QuotePage extends Component {
                   type='radio'
                   name='existingPolicy'
                   value='yes'
-                  onChange={this.handleFieldChange.bind(this)}
                   />
-
                   <Form.Field 
                   label='No' 
                   control='input' type='radio' 
                   name='existingPolicy'
-                  value="no"
-                  onChange={this.handleFieldChange.bind(this)}
+                  value='no'
                   />
                   </Form.Group>
-                  <Form.Group grouped>
+                  
+                  <Form.Group 
+                  grouped
+                  onChange={this.handleRadioChange.bind(this)}
+                  >
                   <label>Does your Business Sell Alcohol, Tobacco, Or Firearms?</label>
-                  <Form.Field label='Yes' control='input' type='radio' name='alcoholTobaccoOrFirearms' 
-                  onChange={this.handleFieldChange.bind(this)}
+                  <Form.Field 
+                  label='Yes' 
+                  control='input'
+                  value='yes' 
+                  type='radio' 
+                  name='alcoholTobaccoOrFirearms' 
                   />
-                  <Form.Field label='No' control='input' type='radio' name='alcoholTobaccoOrFirearms' 
-                  onChange={this.handleFieldChange.bind(this)}
+                  <Form.Field 
+                  label='No' 
+                  control='input' 
+                  type='radio'
+                  value='no' 
+                  name='alcoholTobaccoOrFirearms' 
                   />
                   </Form.Group>
-                  <Form.Group grouped>
+
+                  <Form.Group 
+                  grouped
+                  onChange={this.handleRadioChange.bind(this)}
+                  >
                   <label>Have You Had A General Liability Claim Within 5 Years?</label>
-                  <Form.Field label='Yes' control='input' type='radio' name='claim5Years'
-                  onChange={this.handleFieldChange.bind(this)}
+                  <Form.Field 
+                  label='Yes' 
+                  control='input' 
+                  type='radio' 
+                  name='claim5Years'
+                  value='yes'
                   />
-                  <Form.Field label='No' control='input' type='radio' name='claim5Years' 
-                  onChange={this.handleFieldChange.bind(this)}
+                  <Form.Field 
+                  label='No' 
+                  control='input' 
+                  type='radio' 
+                  name='claim5Years'
+                  value='no'
                   />
                   </Form.Group>
-                  <Form.Group grouped>
+
+                  <Form.Group 
+                  grouped
+                  onChange={this.handleRadioChange.bind(this)}
+                  >
                   <label>Have You Been Cancelled, Declined, Or Refused Coverage Within 5 Years?</label>
-                  <Form.Field label='Yes' control='input' type='radio' name='refused' 
-                  onChange={this.handleFieldChange.bind(this)}
+                  <Form.Field 
+                  label='Yes' 
+                  control='input' 
+                  type='radio' 
+                  name='refused' 
+                  value='yes'
                   />
-                  <Form.Field label='No' control='input' type='radio' name='refused' 
-                  onChange={this.handleFieldChange.bind(this)}
+                  <Form.Field 
+                  label='No' 
+                  control='input' 
+                  type='radio' 
+                  name='refused' 
+                  value='no'
                   />
                   </Form.Group>
-                  <Form.Group grouped>
+
+                  <Form.Group 
+                  grouped
+                  onChange={this.handleRadioChange.bind(this)}
+                  >
                   <label>Deductible</label>
-                  <Form.Field label='$500' control='input' type='radio' name='deductible' />
-                  <Form.Field label='$1000' control='input' type='radio' name='deductible' />
-                  <Form.Field label='$2500' control='input' type='radio' name='deductible' />
-                  <Form.Field label='$5000' control='input' type='radio' name='deductible' />
+                  <Form.Field value='$500'  label='$500' control='input' type='radio' name='deductible' />
+                  <Form.Field value='$1000' label='$1000' control='input' type='radio' name='deductible' />
+                  <Form.Field value='$2500' label='$2500' control='input' type='radio' name='deductible' />
+                  <Form.Field value='$5000' label='$5000' control='input' type='radio' name='deductible' />
                   </Form.Group>
-                  <Form.Group grouped>
+                  
+                  <Form.Group 
+                  grouped
+                  onChange={this.handleRadioChange.bind(this)}
+                  >
                   <label>Incident Max Benefit</label>
-                  <Form.Field label='$100,000' control='input' type='radio' name='maxBenefit' />
-                  <Form.Field label='$500,000' control='input' type='radio' name='maxBenefit' />
-                  <Form.Field label='$1,000,000 ' control='input' type='radio' name='maxBenefit' />
-                  <Form.Field label='$2,000,000' control='input' type='radio' name='maxBenefit' />
+                  <Form.Field value='$100,000'  label='$100,000' control='input' type='radio' name='maxBenefit' />
+                  <Form.Field value='$500,000'  label='$500,000' control='input' type='radio' name='maxBenefit' />
+                  <Form.Field value='$1,000,000' label='$1,000,000' control='input' type='radio' name='maxBenefit' />
+                  <Form.Field value='$2,000,000' label='$2,000,000' control='input' type='radio' name='maxBenefit' />
                   </Form.Group>
-                  <Form.Group grouped>
+                  
+                  <Form.Group 
+                  grouped
+                  onChange={this.handleRadioChange.bind(this)}
+                  >
                   <label>Aggregate Max Benefit</label>
-                  <Form.Field label='$100,000' control='input' type='radio' name='aggMaxBenefit' />
-                  <Form.Field label='$500,000' control='input' type='radio' name='aggMaxBenefit' />
-                  <Form.Field label='$1,000,000 ' control='input' type='radio' name='aggMaxBenefit' />
-                  <Form.Field label='$2,000,000' control='input' type='radio' name='aggMaxBenefit' />
-                  <Form.Field label='$3,000,000' control='input' type='radio' name='aggMaxBenefit' />
-                  <Form.Field label='$5,000,000' control='input' type='radio' name='aggMaxBenefit' />
+                  <Form.Field value='$100,000' label='$100,000' control='input' type='radio' name='aggMaxBenefit' />
+                  <Form.Field value='$500,000' label='$500,000' control='input' type='radio' name='aggMaxBenefit' />
+                  <Form.Field value='$1,000,000' label='$1,000,000' control='input' type='radio' name='aggMaxBenefit' />
+                  <Form.Field value='$2,000,000' label='$2,000,000' control='input' type='radio' name='aggMaxBenefit' />
+                  <Form.Field value='$3,000,000' label='$3,000,000' control='input' type='radio' name='aggMaxBenefit' />
+                  <Form.Field value='$5,000,000' label='$5,000,000' control='input' type='radio' name='aggMaxBenefit' />
                   </Form.Group>
                   <Button content='Click Here for Annual QUOTE' primary />
 
@@ -291,7 +358,7 @@ export class QuotePage extends Component {
                   success
                   size='large'
                   header={'Quote Calculated'}
-                  content={"Here is your annual quote: " + this.state.quote }
+                  content={(this.state.quote == 0 ? "Please email customerservice@coverage.com to find out if we have a program for you." : "Here is your annual quote: " + this.state.quote )}
                   />
                   </Container>
                   <Segment inverted vertical style={{ padding: '5em 0em' }}>
