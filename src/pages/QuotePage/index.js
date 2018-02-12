@@ -65,53 +65,63 @@ export class QuotePage extends Component {
   }
 
   calculateQuote(state) {
-    console.log('this is here', state.existingPolicy);
     let quote = Math.round(500*industryOptionsMultiplier[state.industry]
-    *footTrafficMultiplier[state.footTraffic]
-    *unitedStatesMultiplier[state.stateOfOperation]
-    *yearsIndustryMultiplier[state.yearsIndustry]
-    *payrollMultiplier[state.totalPayroll]
-    *grossIncomeMultiplier[state.ownerIncome]
-    *(state.existingPolicy === 'yes' ? 0.95 : 1.1)
-    *(state.alcoholTobaccoOrFirearms === 'yes' ? 1.2 : 1)
-    *(state.claim5Years === 'yes' ? 0 : 1)
-    *(state.refused === 'yes' ? 0 : 1)
-    *(deductibleMultiplier[state.deductible])
-    *(maxBenefitMultiplier[state.maxBenefit])
-    *(aggMaxBenefitMultiplier[state.aggMaxBenefit])
-    )
+      *footTrafficMultiplier[state.footTraffic]
+      *unitedStatesMultiplier[state.stateOfOperation]
+      *yearsIndustryMultiplier[state.yearsIndustry]
+      *payrollMultiplier[state.totalPayroll]
+      *grossIncomeMultiplier[state.ownerIncome]
+      *(state.existingPolicy === 'yes' ? 0.95 : 1.1)
+      *(state.alcoholTobaccoOrFirearms === 'yes' ? 1.2 : 1)
+      *(state.claim5Years === 'yes' ? 0 : 1)
+      *(state.refused === 'yes' ? 0 : 1)
+      *(deductibleMultiplier[state.deductible])
+      *(maxBenefitMultiplier[state.maxBenefit])
+      *(aggMaxBenefitMultiplier[state.aggMaxBenefit])
+      )
     console.log('hey quote', quote);
-    return quote;
-  }
+  //   if(quote == 0){
+  //    this.setState({
+  //     error: true,
+  //     errorMessage: 'Please contact customerservice@sbgl.com'
+  //   });
+  //  }
+  //  else{ 
+  //   this.setState({error: false});
+  // }
+  return quote;
+}
 
-  handleSubmit(e) {
-    console.log("submitted State", this.state);
-    this.setState({quote: this.calculateQuote(this.state)});
-  }
+handleSubmit(e) {
+  console.log("submitted State", this.state);
+  this.setState({quote: this.calculateQuote(this.state)});
+}
 
-  render() {
-    const {
-      yearsIndustry,
-      stateOfOperation,
-      industry, 
-      payroll,
-      submittedIndustry,
-      submittedPayroll,
-      quote,
-      error = false, 
-      errorMessage 
-    } = this.state
+render() {
+  const {
+    yearsIndustry,
+    stateOfOperation,
+    industry, 
+    payroll,
+    submittedIndustry,
+    submittedPayroll,
+    quote,
+    error = false, 
+    errorMessage 
+  } = this.state
 
-    return (
-      <div>
-      <Container>
-      <Menu pointing secondary size='large' className='menu-items' >
-      <Menu.Item as={Link} to='/'>Home</Menu.Item>
-      <Menu.Item as={Link} to='/quote' active>Quote</Menu.Item>
-      <Menu.Item as={Link} to='/referral'>$50 Referral</Menu.Item>
-      <Menu.Item as={Link} to='/faq'>FAQ</Menu.Item>
-      <Menu.Item as={Link} to='/testimonials'>Testimonials</Menu.Item>
-      <Menu.Item as={Link} to='/contact'>Contact Us</Menu.Item>
+  const contactCustomerServiceMessage = "We're sorry, but due to your answers listed above, we are unable to offer you coverage at this time. Please recheck your answers or email our Customer Service for more information. Thank you.";
+
+  return (
+    <div>
+    <Container>
+    <Menu pointing secondary size='large' className='menu-items' >
+    <Menu.Item as={Link} to='/'>Home</Menu.Item>
+    <Menu.Item as={Link} to='/quote' active>Quote</Menu.Item>
+    <Menu.Item as={Link} to='/referral'>$50 Referral</Menu.Item>
+    <Menu.Item as={Link} to='/faq'>FAQ</Menu.Item>
+    <Menu.Item as={Link} to='/testimonials'>Testimonials</Menu.Item>
+    <Menu.Item as={Link} to='/contact'>Contact Us</Menu.Item>
                 {/*<Menu.Item position='right'>
                   <Button as='a' color='blue' >Log in</Button>
                   <Button as='a'   style={{ marginLeft: '0.5em' }}>Sign Up</Button>
@@ -352,14 +362,22 @@ export class QuotePage extends Component {
                   <Button content='Click Here for Annual QUOTE' primary />
 
                   </Form>
-                  <strong>onSubmit:</strong>
-                  <pre>{JSON.stringify(this.state.quote)}</pre>
-                  <Message
-                  success
-                  size='large'
-                  header={'Quote Calculated'}
-                  content={(this.state.quote == 0 ? "Please email customerservice@coverage.com to find out if we have a program for you." : "Here is your annual quote: " + this.state.quote )}
-                  />
+
+
+                  {this.state.quote > 0 ?  
+                    <Message
+                    success
+                    size='large'
+                    header={'Quote Calculated'}
+                    content={"Here is your annual quote: " + this.state.quote }
+                    />
+                    : 
+                    <Message
+                    error
+                    size='large'
+                    content={contactCustomerServiceMessage}
+                    />
+                  }
                   </Container>
                   <Segment inverted vertical style={{ padding: '5em 0em' }}>
                   <Container>
@@ -391,7 +409,7 @@ export class QuotePage extends Component {
                   </Segment>
                   </div>
                   )
-                }
-              }
+}
+}
 
-              export default QuotePage
+export default QuotePage
