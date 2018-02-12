@@ -183,7 +183,8 @@ export const grossIncomeMultiplier = {
 '50K': .95, 
 '51-75K': 1, 
 '76-100K': 1.05, 
-'101-200K': 1.1
+'101-200K': 1.1,
+'201K+': 0
 };
 
 export const payrollOptions = [
@@ -198,7 +199,8 @@ export const payrollMultiplier = {
   '100K': .95, 
   '101-150K': 1, 
   '151-250K': 1.05, 
-  '251-500K': 1.1
+  '251-500K': 1.1,
+  '501+': 0
 };
 
 export const grossAnnualRevenueOptions = [
@@ -215,7 +217,8 @@ export const grossAnnualRevenueMultiplier = {
 '101-150K': 1,
 '151-250K': 1.05,
 '101-200K': 1.1,
-'501+': 1.15
+'501+': 1.15,
+'1MM+': 0
 };
 
 export const numberOfEmployeesOptions = [
@@ -242,23 +245,24 @@ export const numberOfEmployeesMultiplier = {
   '7' : 1.12, 
   '8' : 1.14, 
   '9' : 1.16, 
-  '10': 1.18
+  '10': 1.18,
+  '11': 0
 };
 
 export const footTrafficOptions = [
-{key: 'foot50', value: 'foot50', text: 'under 50'},
-{key: 'foot51', value: 'foot51', text: '51-200'},
-{key: 'foot201', value: 'foot201', text: '201-500'},
-{key: 'foot500', value: 'foot500', text: '501-1000'},
-{key: 'foot1000', value: 'foot1000', text: '1000+'}
+{key: 'foot50', value: 'under 50', text: 'under 50'},
+{key: 'foot51', value: '51-200', text: '51-200'},
+{key: 'foot201', value: '201-500', text: '201-500'},
+{key: 'foot500', value: '501-1000', text: '501-1000'},
+{key: 'foot1000', value: '1000+', text: '1000+'}
 ];
 
 export const footTrafficMultiplier = {
-  'foot50': 1.2,
-  'foot51': 1.5,
-  'foot201':1.6,
-  'foot500':1.8,
-  'foot1000':5
+  'under 50': .85,
+  '51-200': .93,
+  '201-500':1,
+  '501-1000':1.1,
+  '1000+':1.2
 };
 
 export const deductibleMultiplier = {
